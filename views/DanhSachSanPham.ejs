@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("head") %>
+<body>
+    <h1>Danh Sách Sản Phẩm</h1>
+    <ul>
+        <% SPs.map(function (v) { %>
+            <li><%= v.TenSP %></li>
+        <% }) %>
+    </ul>
+<h1><a href="http://localhost:5000/">Home</a></h1>
+</body>
+</html>

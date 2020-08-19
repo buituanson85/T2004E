@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("head") %>
+<body>
+    <form action="/search" method="get">
+        <input type="text" name="keyword"/>
+        <button type="submit">Search</button>
+    </form>
+    <h1>Danh Sách Khách Hàng</h1>
+<ul>
+    <% khs.map(function (v) { %>
+            <li><%= v.TenKH %></li>
+            <li><%= v.DiaChi %></li>
+            <li><%= v.DienThoai %></li>
+    <% }) %>
+</ul>
+<h1><a href="danh-sach-san-pham">Danh Sách Sản Phẩm</a></h1>
+</body>
+</html>
