@@ -79,19 +79,19 @@ app.get("/danh-sach-san-pham",function (req,res) {
     });
     // res.render("home");
 });
-app.get("/san-pham/:IDSP",function (req,res) {
-    //res.send("Day la trang chu!");
-    //láy dữ liệu
-    db.query("SELECT * FROM SanPham WHERE IDSP",function (err,rows) {
-        if(err) res.send("Ko co ket qya");
-        else
-            // res.send(rows.recordset);
-            res.render("SanPham",{
-                SPs: rows.recordset
-            });
-    });
-    // res.render("home");
-});
+// app.get("/san-pham/:IDSP",function (req,res) {
+//     //res.send("Day la trang chu!");
+//     //láy dữ liệu
+//     db.query("SELECT * FROM SanPham WHERE IDSP",function (err,rows) {
+//         if(err) res.send("Ko co ket qya");
+//         else
+//             // res.send(rows.recordset);
+//             res.render("SanPham",{
+//                 SPs: rows.recordset
+//             });
+//     });
+//     // res.render("home");
+// });
 
 app.get("/search",function (req,res) {
     //res.send("Day la trang chu!");
@@ -107,5 +107,93 @@ app.get("/search",function (req,res) {
     });
     // res.render("home");
 });
+// link trả về from khách hàng
+app.get("/them-khach-hang",function (req,res) {
+    res.render("form");
+})
 
+// nhận dữ liệu thêm vào bd
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended:false}));
+//false lấy đc string number true all
+app.post("/luu-khach-hang",function (req,res) {
+    let ten = req.body.TenKH;
+    // res.send(ten);
+    let dt = req.body.DienThoai;
+    let dc = req.body.DiaChi;
+    let sql_text = "INSERT INTO KhachHang(TenKh,DienThoai,DiaChi) VALUES(N'"+ten+"',N'"+dt+"',N'"+dc+"')";
+    db.query(sql_text,function (err,rows) {
+        if(err) res.send(err);
+        // else res.send("Them KH Thanh Cong");
+        else res.redirect("/"); //trả về trang chủ
+    })
+})
+
+//install body-parser --save lấy thư viện
+
+app.get("/them-san-pham",function (req,res) {
+    res.render("formsanpham");
+})
+
+app.post("/luu-san-pham",function (req,res) {
+    let tensp = req.body.TenSP;
+    // res.send(ten);
+    let dv = req.body.DonVi;
+    let mt = req.body.MoTa;
+    let gia = req.body.Gia;
+    let anh = req.body.AnhDaiDien
+    let sql_text = "INSERT INTO SanPham(TenSP,DonVi,MoTa,Gia,AnhDaiDien) VALUES(N'"+tensp+"','"+dv+"',N'"+mt+"','"+gia+"','"+anh+"')";
+    db.query(sql_text,function (err,rows) {
+        if(err) res.send(err);
+        // else res.send("Them KH Thanh Cong");
+        else res.redirect("/danh-sach-san-pham"); //trả về trang chủ
+    })
+})
+
+//tạo đơn hàng
+app.get("/tao-don",function (req,res) {
+   let sql_text = "SELECT * FROM KhachHang;SELECT * FROM SanPham";
+   db.query(sql_text,function (err,rows) {
+       if (err) res.send(err);
+       else{
+           res.render("donhang",{
+               khs: rows.recordsets[0],
+               SPs:rows.recordsets[1]
+           });
+       }
+   })
+    // res.render("donhang");
+})
+
+//Nhận dữ liệu tạo đơn hàng
+
+app.post("/luu-don-hang",function (req,res) {
+    let khID = req.body.IDKH;
+    let spID = req.body.IDSP;
+    let sql_text = "SELECT * FROM SanPham WHERE IDSP IN ("+spID+");";
+    db.query(sql_text,function (err,rows) {
+        if(err) res.send(err);
+        else {
+            let SPs = rows.recordset;
+            let tongtien = 0;
+            SPs.map(function (e) {
+                tongtien += e.Gia;
+            });
+            // let sql_text2 = "INSERT INTO DonHang(IDKH,TongTien,ThoiGian) VALUES("+khID+","+tongtien+",GETDATE());SELECT SCOPE_IDENTITY() AS IDDH;";
+            // db.query(sql_text2,function (err,rows) {
+            //     let donhang = rows.recordset[0];
+            //     let MaSo = donhang.IDDH;
+            //     let sql_text3 = "";
+            //     SPs.map(function (e) {
+            //         sql_text3 += "INSERT INTO SanPhamDonHang(IDDH,IDSP,SoLuong,ThanhTien) VALUES("+MaSo+","+e.IDSP+",1,"+(e.Gia*1)+");";
+            //     })
+            //     db.query(sql_text3,function (err,rows) {
+            //         if(err) res.send(err);
+            //         else res.send("Tao đơn hàng")
+            //     })
+            // })
+        }
+    });
+    // res.send(khID);
+})
 

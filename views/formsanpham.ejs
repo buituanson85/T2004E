@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("head") %>
+<body>
+<h1>Them Khách Hàng Mới</h1>
+<form action="/luu-san-pham" method="post">
+    <input type="text" name="TenSP" placeholder="Tên Sản Phẩm"/><br>
+    <input type="text" name="DonVi" placeholder="Đơn vị"/><br>
+    <textarea type="text" name="MoTa" placeholder="Mô tả"></textarea><br>
+    <input type="number" name="Gia" placeholder="Giá"/><br>
+    <input type="text" name="AnhDaiDien" placeholder="Ảnh đại diện">
+<!--    <input type="number" name="SoLuong" placeholder="Số Lượng"/><br>-->
+    <button type="submit">Thêm Sản Phẩm</button>
+</form>
+</body>
+</html>
