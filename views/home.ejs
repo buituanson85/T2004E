@@ -2,19 +2,35 @@
 <html lang="en">
 <%- include("head") %>
 <body>
-<h1> Đây Là Trang chủ</h1>
-<!--    <form action="/search" method="get">-->
-<!--        <input type="text" name="keyword"/>-->
-<!--        <button type="submit">Search</button>-->
-<!--    </form>-->
-<!--    <h1>Danh Sách Khách Hàng</h1>-->
-<!--<ul>-->
-<!--    <% khs.map(function (v) { %>-->
-<!--            <li><%= v.TenKH %></li>-->
-<!--            <li><%= v.DiaChi %></li>-->
-<!--            <li><%= v.DienThoai %></li>-->
-<!--    <% }) %>-->
-<!--</ul>-->
-<!--<h1><a href="danh-sach-san-pham">Danh Sách Sản Phẩm</a></h1>-->
+   <div class="container kh">
+       <h1 class="display-5 TD">Danh Sách Khách Hàng</h1>
+       <form action="/search" method="get" class="form-inline send">
+           <input type="text" name="keyword" class="form-control sendin" />
+           <button class="btn btn-primary" type="submit">Search</button>
+       </form>
+       <table class="table table-hover">
+           <thead>
+           <tr>
+               <th scope="col" class="th1">ID</th>
+               <th scope="col" class="th2">Họ Và Tên</th>
+               <th scope="col" class="th3">Địa chỉ</th>
+               <th scope="col" class="th4">Số điện thoại</th>
+               <th scope="col" class="th5">Email</th>
+           </tr>
+           </thead>
+           <tbody>
+           <% khs.map(function (v) { %>
+               <tr>
+                   <td class="td1"><%= v.IDKH %></td>
+                   <td class="td2"><%= v.TenKH %></td>
+                   <td class="td3"><%= v.DiaChi %></td>
+                   <td class="td4"><%= v.DienThoai %></td>
+                   <td class="td4"><%= v.Email %></td>
+               </tr>
+           <% }) %>
+           </tbody>
+       </table>
+       <h1 class="h1sp"><a href="danh-sach-san-pham" class="aa">Danh Sách Sản Phẩm</a></h1>
+   </div>
 </body>
 </html>

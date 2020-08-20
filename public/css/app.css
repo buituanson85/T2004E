@@ -1,3 +1,58 @@
-body{
-    background: lavenderblush;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.1vw;
+    word-spacing: 0.1vw;
+    font-size: 0.85vw; /*vw ko đổi hiển thị chữ khi zoom to nhỏ màn hình đi kèm với thẻ viewport*/
+    background: #cccccc !important;
+}
+.kh{
+    background: #FFFFFF;
+    padding: 15px 30px 30px 15px;
+}
+.TD{
+    font-weight: bolder !important;
+    padding-left: 20px;
+}
+.send{
+    float: right;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.sendin{
+    margin-right: 10px;
+}
+.aa {
+    color: #171717;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.aa:hover {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.imgs{
+    width: 50%;
+}
+.khdssp{
+    width: 100%;
+}
+.khdssp2{
+    width: 100%;
+    display: flex;
+}
+.khdssp3{
+    width: 100%;
+}
+.khdssp4{
+    width: 25%;
 }

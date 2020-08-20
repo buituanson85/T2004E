@@ -79,6 +79,19 @@ app.get("/danh-sach-san-pham",function (req,res) {
     });
     // res.render("home");
 });
+app.get("/san-pham/:IDSP",function (req,res) {
+    //res.send("Day la trang chu!");
+    //láy dữ liệu
+    db.query("SELECT * FROM SanPham WHERE IDSP",function (err,rows) {
+        if(err) res.send("Ko co ket qya");
+        else
+            // res.send(rows.recordset);
+            res.render("SanPham",{
+                SPs: rows.recordset
+            });
+    });
+    // res.render("home");
+});
 
 app.get("/search",function (req,res) {
     //res.send("Day la trang chu!");
