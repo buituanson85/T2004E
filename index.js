@@ -30,7 +30,7 @@ const config = {
     server:"DESKTOP-S30D2EK\\SQLEXPRESS",
     user:"sa",
     password:"123",
-    database:"Lab4",
+    database:"Assignment1",
     options:{
         encrypt:false
     }
@@ -56,7 +56,7 @@ app.get("/",function (req,res) {
     //res.send("Day la trang chu!");
     //láy dữ liệu
     db.query("SELECT * FROM KhachHang",function (err,rows) {
-        if(err) res.send("Ko co ket qya");
+        if(err) res.send("Ko co ket qua");
         else
             // res.send(rows.recordset);
             res.render("home",{
@@ -70,11 +70,11 @@ app.get("/danh-sach-san-pham",function (req,res) {
     //res.send("Day la trang chu!");
     //láy dữ liệu
     db.query("SELECT * FROM SanPham",function (err,rows) {
-        if(err) res.send("Ko co ket qya");
+        if(err) res.send("Ko co ket qua");
         else
             // res.send(rows.recordset);
             res.render("DanhSachSanPham",{
-                SPs: rows.recordset
+                sps: rows.recordset
             });
     });
     // res.render("home");
@@ -98,7 +98,7 @@ app.get("/search",function (req,res) {
     //láy dữ liệu
     let key_search = "'%"+req.query.keyword+"%'";
     db.query("SELECT * FROM KhachHang WHERE TenKH LIKE "+key_search,function (err,rows) {
-        if(err) res.send("Ko co ket qya");
+        if(err) res.send("Ko co ket qua");
         else
             // res.send(rows.recordset);
             res.render("home",{
@@ -114,14 +114,15 @@ app.get("/them-khach-hang",function (req,res) {
 
 // nhận dữ liệu thêm vào bd
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
 //false lấy đc string number true all
 app.post("/luu-khach-hang",function (req,res) {
     let ten = req.body.TenKH;
     // res.send(ten);
     let dt = req.body.DienThoai;
     let dc = req.body.DiaChi;
-    let sql_text = "INSERT INTO KhachHang(TenKh,DienThoai,DiaChi) VALUES(N'"+ten+"',N'"+dt+"',N'"+dc+"')";
+    let ma = req.body.Email;
+    let sql_text = "INSERT INTO KhachHang(TenKh,DienThoai,DiaChi,Email) VALUES(N'"+ten+"',N'"+dt+"',N'"+dc+"','"+ma+"')";
     db.query(sql_text,function (err,rows) {
         if(err) res.send(err);
         // else res.send("Them KH Thanh Cong");
@@ -150,6 +151,7 @@ app.post("/luu-san-pham",function (req,res) {
     })
 })
 
+
 //tạo đơn hàng
 app.get("/tao-don",function (req,res) {
    let sql_text = "SELECT * FROM KhachHang;SELECT * FROM SanPham";
@@ -158,7 +160,7 @@ app.get("/tao-don",function (req,res) {
        else{
            res.render("donhang",{
                khs: rows.recordsets[0],
-               SPs:rows.recordsets[1]
+               sps:rows.recordsets[1]
            });
        }
    })
@@ -168,32 +170,34 @@ app.get("/tao-don",function (req,res) {
 //Nhận dữ liệu tạo đơn hàng
 
 app.post("/luu-don-hang",function (req,res) {
-    let khID = req.body.IDKH;
-    let spID = req.body.IDSP;
-    let sql_text = "SELECT * FROM SanPham WHERE IDSP IN ("+spID+");";
+    let khID = req.body.KhachHangID;
+    let spID = req.body.SanPhamID;
+    let sql_text = "SELECT * FROM SanPham WHERE ID IN ("+spID+");";
     db.query(sql_text,function (err,rows) {
         if(err) res.send(err);
-        else {
-            let SPs = rows.recordset;
+        else{
+            let sps = rows.recordset;
             let tongtien = 0;
-            SPs.map(function (e) {
+            sps.map(function (e) {
                 tongtien += e.Gia;
             });
-            // let sql_text2 = "INSERT INTO DonHang(IDKH,TongTien,ThoiGian) VALUES("+khID+","+tongtien+",GETDATE());SELECT SCOPE_IDENTITY() AS IDDH;";
-            // db.query(sql_text2,function (err,rows) {
-            //     let donhang = rows.recordset[0];
-            //     let MaSo = donhang.IDDH;
-            //     let sql_text3 = "";
-            //     SPs.map(function (e) {
-            //         sql_text3 += "INSERT INTO SanPhamDonHang(IDDH,IDSP,SoLuong,ThanhTien) VALUES("+MaSo+","+e.IDSP+",1,"+(e.Gia*1)+");";
-            //     })
-            //     db.query(sql_text3,function (err,rows) {
-            //         if(err) res.send(err);
-            //         else res.send("Tao đơn hàng")
-            //     })
-            // })
+            let sql_text2 = "INSERT INTO DonHang(KhachHangID,TongTien,ThoiGian) VALUES("+khID+","+tongtien+",GETDATE());SELECT SCOPE_IDENTITY() AS DonHangID;";
+            db.query(sql_text2,function (err,rows) {
+                let donhang = rows.recordset[0];
+                let MaSo = donhang.DonHangID;
+                let sql_text3 = "";
+                sps.map(function (e) {
+                    sql_text3 += "INSERT INTO DonHangSanPham(DonHangID,SanPhamID,SoLuong,ThanhTien) VALUES("+MaSo+","+e.ID+",1,"+(e.Gia*1)+");";
+                })
+                db.query(sql_text3,function (err,rows) {
+                    if(err) res.send(err);
+                    else res.redirect("/danh-sach-san-pham");
+                })
+            })
         }
     });
     // res.send(khID);
+    // res.send(spID);
+    // res.send(sql_text);
 })
 

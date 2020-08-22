@@ -4,15 +4,15 @@
 <body>
 <h1>Tạo đơn hàng</h1>
     <form action="/luu-don-hang" method="post">
-        <select name="IDKH">
+        <select name="KhachHangID">
             <% khs.map( e=> {%>
-            <option value="<%= e.IDKH %>"> <%= e.TenKH %> </option>
+            <option value="<%= e.ID %>"> <%= e.TenKH %> </option>
             <% }) %>
         </select>
         <label>Chọn Sản Phẩm</label>
         <ul>
-            <% SPs.map( function (e) { %>
-                <li><label><input type="checkbox" name="IDSP[]" value="<%= e.IDKH%>"/> <%= e.TenSP%></label></li>
+            <% sps.map( function (e) { %>
+                <li><label><input type="checkbox" name="SanPhamID[]" value="<%= e.ID%>"/> <%= e.TenSP%></label></li>
           <%  }) %>
         </ul>
         <button type="submit">sumbit</button>

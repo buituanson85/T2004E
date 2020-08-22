@@ -6,12 +6,13 @@
       <div class="container kh khdssp">
           <h1 class="display-5 TD">Danh Sách Sản Phẩm</h1>
           <h2><a href="/them-san-pham">Thêm Sản Phẩm</a></h2>
+          <h2><a href="/tao-don">Thêm Đơn hàng</a></h2>
           <div class="container khdssp2">
               <div class="khdssp3">
-                      <% SPs.map(function (v) { %>
+                      <% sps.map(function (v) { %>
                        <div class="khdssp4">
-                           <div><img class="img-fluid imgs" src="<%= v.AnhDaiDIen %>" alt="a"></div>
-                          <div class="tensp"><a href="/san-pham/<%= v.IDSP %>" class="aa"><%= v.TenSP %></a> </div>
+                           <div><img class="img-fluid imgs" src="<%= v.AnhDaiDien %>" alt="a"></div>
+                          <div class="tensp"><a href="/san-pham/<%= v.ID %>" class="aa"><%= v.TenSP %></a> </div>
                            <div class="tensp"><a class="aa"><%= v.DonVi %></a> </div>
                            <div class="tensp"><a class="aa"><%= v.MoTa %></a> </div>
                            <div class="tensp"><a class="aa"><%= v.Gia %></a> </div>
