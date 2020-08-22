@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("head") %>
+<body>
+<div class="container kh">
+    <h1 class="display-5 TD"><%= khachhang.TenKH %></h1>
+    <div class="container TKH">
+        <div class="fromkh">
+            <ol>
+                <% donhang.map(function (v) { %>
+                    <li><%= v.ThoiGian %> -- TongTien: <%= v.TongTien%></li>
+                <%  }) %>
+            </ol>
+        </div>
+    </div>
+</div>
+</body>
+</html>

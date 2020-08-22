@@ -200,4 +200,51 @@ app.post("/luu-don-hang",function (req,res) {
     // res.send(spID);
     // res.send(sql_text);
 })
+//:id truyền tham số tĩnh
+//ngoon ngu bat dong bo hoa async await
 
+app.get("/chi-tiet-khach-hang/:id",async function (req,res) {
+    let khid = req.params.id;
+    let sql_text = "SELECT * FROM KhachHang WHERE ID ="+khid;
+    let kh = "ko co";
+    // await db.query(sql_text, function (err,rows) {
+    //     // if(err) res.send(err);
+    //     // else
+    //     //     res.send(rows.recordset);
+    //     if (err) console.log("error");
+    //     else
+    //         kh = rows.recordset
+    // })
+    await db.query(sql_text).then(rs=>{
+        kh = rs;
+    }).catch(function (err) {
+        console.log(err);
+    });
+    let sql_text2 = "SELECT * FROM DonHang WHERE KhachHangID = " +khid;
+    let donhang = [];
+    await db.query(sql_text2).then(rs=>{
+        donhang = rs;
+    }).catch(function (err) {
+        console.log(err);
+    });
+    await res.render("khachhang",{
+        khachhang: kh.recordset[0],
+        donhang: donhang.recordset
+
+        // khachhang:kh,
+        // donhang:donhang
+    });
+})
+
+//rs laf bieens muoons dat gi thi dat (day goi la su ly bat dong bo hoa)
+app.get("/chi-tiet-san-pham/:id",async function (req,res) {
+    let spid = req.params.id;
+    let sql_text = "SELECT * FROM SanPham WHERE ID ="+spid;
+    let sp = "ko co";
+    await db.query(sql_text).then(rs=>{
+        sp = rs;
+    }).catch(function (err) {
+        console.log(err);
+    })
+    await res.send(sp);
+})
