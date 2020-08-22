@@ -4,7 +4,6 @@
 <body>
    <div class="container kh">
        <h1 class="display-5 TD">Danh Sách Khách Hàng</h1>
-       <h2><a href="/them-khach-hang">Thêm Khách Hàng</a></h2>
        <form action="/search" method="get" class="form-inline send">
            <input type="text" name="keyword" class="form-control sendin" />
            <button class="btn btn-primary" type="submit">Search</button>
@@ -31,7 +30,8 @@
            <% }) %>
            </tbody>
        </table>
-       <h1 class="h1sp"><a href="danh-sach-san-pham" class="aa">Danh Sách Sản Phẩm</a></h1>
+       <button type="submit"  class="btn btn-secondary"><a href="/them-khach-hang" class="aa">Thêm Khách Hàng</a></button><br><br>
+       <button type="submit"  class="btn btn-secondary dssp"><a href="/danh-sach-san-pham" class="aa">Danh Sách Sản Phẩm</a></button>
    </div>
 </body>
 </html>

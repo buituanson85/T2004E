@@ -2,13 +2,21 @@
 <html lang="en">
 <%- include("head") %>
 <body>
-<h1>Them Khách Hàng Mới</h1>
-<form action="/luu-khach-hang" method="post">
-    <input type="text" name="TenKH" placeholder="Tên KH"/><br>
-    <input type="text" name="DienThoai" placeholder="Điện Thoại"/><br>
-    <textarea  name="DiaChi" placeholder="Địa CHỉ"></textarea><br>
-    <input type="text" name="Email" placeholder="E mail"/><br>
-    <button type="submit">Thêm Khách hàng</button>
-</form>
+
+<div class="container kh">
+    <h1 class="display-5 TD">Thêm Khách Hàng Mới</h1>
+    <div class="container TKH">
+        <div class="fromkh">
+            <form action="/luu-khach-hang" method="post">
+                <input class="input-group-text" type="text" name="TenKH" placeholder="Tên KH"/><br>
+                <input class="input-group-text" type="text" name="DienThoai" placeholder="Điện Thoại"/><br>
+                <textarea class="form-control mb-2" name="DiaChi" placeholder="Địa CHỉ"></textarea><br>
+                <input class="input-group-text" type="text" name="Email" placeholder="E mail"/><br>
+
+                <button class="btn btn-danger" type="submit">Thêm Khách hàng</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

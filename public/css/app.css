@@ -18,7 +18,7 @@ body {
 }
 .TD{
     font-weight: bolder !important;
-    padding-left: 20px;
+    text-align: center;
 }
 .send{
     float: right;
@@ -40,8 +40,18 @@ body {
     text-decoration: none;
 }
 
+.TKH{
+    padding: 30px 0;
+}
+.fromkh{
+    margin-left: 200px;
+}
 .imgs{
     width: 50%;
+}
+.form-control.mb-2{
+    width: 23%;
+    background: #cccccc;
 }
 .khdssp{
     width: 100%;
@@ -54,8 +64,42 @@ body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .khdssp4{
-    /*width: 25%;*/
-    flex-basis: 33%;
+    border: 1px solid #cccccc;
+    margin: 10px 10px;
+    flex-basis: 30%;
+    text-align: center;
+}
+.btdssp{
+    float: right;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+.dssphm{
+    padding: 30px 0;
+}
+.custom-select.mb-2{
+    width: 23%;
+    background: #cccccc;
+}
+.donhang{
+    padding: 5px 0 5px 50px;
+}
+li{
+    list-style: none;
+}
+.donhangul{
+    padding-top: 10px;
+}
+.form-check-label.lab{
+    font-size: 24px;
+    padding-top: 10px;
+    font-weight: bolder;
+}
+.sspan{
+    font-size: 24px;
+    font-weight: bolder;
 }

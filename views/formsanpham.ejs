@@ -2,19 +2,26 @@
 <html lang="en">
 <%- include("head") %>
 <body>
-<h1>Them Khách Hàng Mới</h1>
-<form action="/luu-san-pham" method="post">
-    <input type="text" name="TenSP" placeholder="Tên Sản Phẩm"/><br>
-    <select name="DonVi">
-        <option value="Chiếc">Chiếc</option>
-        <option value="Hộp">Hộp</option>
-        <option value="Thùng">Thùng</option>
-    </select><br>
-    <textarea type="text" name="MoTa" placeholder="Mô tả"></textarea><br>
-    <input type="number" name="Gia" placeholder="Giá"/><br>
-    <input type="text" name="AnhDaiDien" placeholder="Ảnh đại diện">
-<!--    <input type="number" name="SoLuong" placeholder="Số Lượng"/><br>-->
-    <button type="submit">Thêm Sản Phẩm</button>
-</form>
+<div class="container kh">
+    <h1 class="display-5 TD">Thêm Sản Phẩm Mới</h1>
+
+    <div class="container TKH">
+        <div class="fromkh">
+            <form action="/luu-san-pham" method="post">
+                <input class="input-group-text" type="text" name="TenSP" placeholder="Tên Sản Phẩm"/><br>
+                <select class="custom-select mb-2" name="DonVi">
+                    <option value="Chiếc">Chiếc</option>
+                    <option value="Hộp">Hộp</option>
+                    <option value="Thùng">Thùng</option>
+                </select><br><br>
+                <textarea class="form-control mb-2" type="text" name="MoTa" placeholder="Mô tả"></textarea><br>
+                <input class="input-group-text" type="number" name="Gia" placeholder="Giá"/><br>
+                <input class="input-group-text" type="text" name="AnhDaiDien" placeholder="Ảnh đại diện"><br>
+                <!--    <input type="number" name="SoLuong" placeholder="Số Lượng"/><br>-->
+                <button class="btn btn-danger" type="submit">Thêm Sản Phẩm</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
